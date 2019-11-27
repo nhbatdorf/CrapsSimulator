@@ -3,7 +3,7 @@ Simulates and Suggests lines of play on a craps table.
 
 To Do List:
 
-Test random number generator and get correct probabilities for rolling one die and then two dice.
+[Tested and Approved!] Test random number generator and get correct probabilities for rolling one die and then two dice.
 
 Create GUI that is responsive and easy to use that caters to a fast paced data entry/display environment.
 
