@@ -5,7 +5,7 @@ To Do List:
 
 [Tested and Approved!] Test random number generator and get correct probabilities for rolling one die and then two dice.
 
-Create GUI that is responsive and easy to use that caters to a fast paced data entry/display environment.
+[Currently Under Construction] Create GUI that is responsive and easy to use that caters to a fast paced data entry/display environment.
 
 Create algorithm that displays suggested lines of play based on previous rolls of dice.
 

@@ -1,0 +1,26 @@
+body {
+	margin: auto;
+	font-family: Times New Roman;
+	font-size: 10px;
+	background-color: #477148;
+}
+
+.rollInputFrame {
+    display: grid;
+    grid-gap: 3vw;
+    grid-template-columns: auto auto auto;
+    position: fixed;
+    bottom: 10px;
+}
+
+.dice {
+    text-align: center;
+    width: 30vw;
+}
+
+.button:hover {
+    -webkit-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+    -moz-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+    -o-box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+    box-shadow:rgba(0,0,0,0.8) 0px 5px 15px, inset rgba(0,0,0,0.15) 0px -10px 20px;
+}
