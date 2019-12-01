@@ -8,6 +8,13 @@ var button = document.getElementById("sim");
 var input = document.getElementById("rolls");
 var ul = document.getElementById("results");
 
+var dieOneButton = document.getElementById("dieOne");
+var dieTwoButton = document.getElementById("dieTwo");
+var dieThreeButton = document.getElementById("dieThree");
+var dieFourButton = document.getElementById("dieFour");
+var dieFiveButton = document.getElementById("dieFive");
+var dieSixButton = document.getElementById("dieSix");
+
 function rollDice() {
 	let doWeShow = document.getElementById("showRolls").checked;
 	for (let x = 0; x<testRoll[0]; x++) {
@@ -40,18 +47,32 @@ function rollDice() {
 	}
 }
 
-function createListElement(num, amt, perc) {
+/function createListElement(num, amt, perc) {
 	var li = document.createElement("li");
 	li.appendChild(document.createTextNode(num + " rolled " + amt + " times for " + perc.toFixed(2) + "% of rolls."));
 
 	ul.appendChild(li);
+}/
+
+function createListElement() {
+	var btn = document.createElement("button");
+	btn.innerHTML = "Delete";
+	btn.onclick = removeParent;
+
+	var li = document.createElement("li");
+	li.appendChild(document.createTextNode(input.value));
+	li.innerHTML = li.innerHTML + " ";
+	li.appendChild(btn);
+
+	ul.appendChild(li);
+	input.value = "";
 }
 
 function displayResults() {
 	var pointInfo = document.createElement("li");
 
 	for (let y = 2; y<13; y++) {
-		createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
+		//createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
 		//console.log(y, Number(((testRoll[y]/testRoll[0]) * 100).toFixed(2)) + "%");
 	}
 	
