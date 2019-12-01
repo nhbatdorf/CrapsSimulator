@@ -5,6 +5,10 @@ body {
 	background-color: #477148;
 }
 
+ul.results {
+    list-style-type: none;
+}
+
 .inputIdentifier {
     display: grid;
     grid-gap: 3vw;

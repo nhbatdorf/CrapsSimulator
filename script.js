@@ -47,12 +47,12 @@ function rollDice() {
 	}
 }
 
-/function createListElement(num, amt, perc) {
+function createListElement(num, amt, perc) {
 	var li = document.createElement("li");
 	li.appendChild(document.createTextNode(num + " rolled " + amt + " times for " + perc.toFixed(2) + "% of rolls."));
 
 	ul.appendChild(li);
-}/
+}
 
 function createListElement() {
 	var btn = document.createElement("button");
@@ -107,3 +107,61 @@ function runSim() {
 }
 
 button.addEventListener("click", runSim);
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function imgSelector(die) {
+	switch(die) {
+		case "dieOne":
+			return "One.gif";
+		case "dieTwo":
+			return "Two.gif";
+		case "dieThree":
+			return "Three.gif";
+		case "dieFour":
+			return "Four.gif";
+		case "dieFive":
+			return "Five.gif";
+		case "dieSix":
+			return "Six.gif";
+	}
+}
+
+function  dieSelect(die) {
+	let firstDie = document.getElementById("selectOne");
+	let secondDie = document.getElementById("selectTwo");
+	let newDie = document.createElement("img");
+
+	let rollLog = document.getElementById("rollLog");
+	let list = document.createElement("li");
+	let listFirst = document.createElement("img");
+	let listSecond = document.createElement("img");
+
+
+	if (!(firstDie.hasChildNodes())) {
+		newDie.setAttribute("src", imgSelector(die));
+		firstDie.appendChild(newDie);
+	} else if (!(secondDie.hasChildNodes())) {
+		newDie.setAttribute("src", imgSelector(die));
+		secondDie.appendChild(newDie);
+		listFirst.setAttribute("src", firstDie.childNodes[0].src);
+		listFirst.setAttribute("width", "30");
+		listFirst.setAttribute("length", "30");
+		listFirst.setAttribute("alt", "Roll");
+		listSecond.setAttribute("src", secondDie.childNodes[0].src);
+		listSecond.setAttribute("width", "30");
+		listSecond.setAttribute("length", "30");
+		listSecond.setAttribute("alt", "Roll");
+		list.appendChild(listFirst);
+		list.appendChild(listSecond);
+		rollLog.appendChild(list);
+		firstDie.removeChild(firstDie.childNodes[0]);
+		secondDie.removeChild(secondDie.childNodes[0]);
+	}
+
+}
+
+function rollRemove() {
+	let rollLog = document.getElementById("rollLog");
+	rollLog.removeChild(rollLog.lastChild);
+}

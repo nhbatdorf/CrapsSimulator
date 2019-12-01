@@ -8,42 +8,39 @@
 	<input id="rolls" type="text" placeholder="enter # of rolls">
 	<button id="sim">Simulate</button>
 	<input type="checkbox" id="showRolls">show all rolls<br>
-	<ul id="results"></ul>
+	<ul class="results"></ul>
 
 	<div class="suggest"></div>
-
-	<div class="rollLog">
-		<ul>
-			<li></li>
-		</ul>
-	</div>
+	<ul  class="results" id="rollLog">
+		<li></li>
+	</ul>
 
 	<div class="inputIdentifier">
-		<div class="dice"></div>
-		<div class="dice"></div>
+		<div class="dice" id="selectOne"></div>
+		<div class="dice" id="selectTwo"></div>
 		<div class="remove">
-			<button class="button"><img src="Undo.gif"></button>
+			<button class="button" onclick="rollRemove()"><img src="Undo.gif"></button>
 		</div>
 	</div>
 
 	<div class="rollInputFrame">
 		<div class="dice">
-    		<button class="button" id="dieOne"><img src="One.gif"></button>
+    		<button class="button" id="dieOne" onclick="dieSelect(this.id)"><img src="One.gif"></button>
     	</div>
     	<div class="dice">
-    		<button class="button" id="dieTwo"><img src="Two.gif"></button>
+    		<button class="button" id="dieTwo" onclick="dieSelect(this.id)"><img src="Two.gif"></button>
     	</div>
     	<div class="dice">
-    		<button class="button" id="dieThree"><img src="Three.gif"></button>
+    		<button class="button" id="dieThree" onclick="dieSelect(this.id)"><img src="Three.gif"></button>
     	</div>
     	<div class="dice">
-    		<button class="button" id="dieFour"><img src="Four.gif"></button>
+    		<button class="button" id="dieFour" onclick="dieSelect(this.id)"><img src="Four.gif"></button>
     	</div>
     	<div class="dice">
-    		<button class="button" id="dieFive"><img src="Five.gif"></button>
+    		<button class="button" id="dieFive" onclick="dieSelect(this.id)"><img src="Five.gif"></button>
     	</div>
     	<div class="dice">
-    		<button class="button" id="dieSix"><img src="Six.gif"></button>
+    		<button class="button" id="dieSix" onclick="dieSelect(this.id)"><img src="Six.gif"></button>
     	</div>
    	</div>			
 
