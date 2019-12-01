@@ -110,6 +110,14 @@ button.addEventListener("click", runSim);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+function clearDieSelector() {
+	let firstDie = document.getElementById("selectOne");
+	let secondDie = document.getElementById("selectTwo");
+
+	firstDie.removeChild(firstDie.childNodes[0]);
+	secondDie.removeChild(secondDie.childNodes[0]);
+}
+
 function imgSelector(die) {
 	switch(die) {
 		case "dieOne":
@@ -137,6 +145,9 @@ function  dieSelect(die) {
 	let listFirst = document.createElement("img");
 	let listSecond = document.createElement("img");
 
+	if (firstDie.hasChildNodes() && secondDie.hasChildNodes()) {
+		clearDieSelector();
+	}
 
 	if (!(firstDie.hasChildNodes())) {
 		newDie.setAttribute("src", imgSelector(die));
@@ -155,13 +166,12 @@ function  dieSelect(die) {
 		list.appendChild(listFirst);
 		list.appendChild(listSecond);
 		rollLog.appendChild(list);
-		firstDie.removeChild(firstDie.childNodes[0]);
-		secondDie.removeChild(secondDie.childNodes[0]);
-	}
+	} 
 
 }
 
 function rollRemove() {
 	let rollLog = document.getElementById("rollLog");
 	rollLog.removeChild(rollLog.lastChild);
+	clearDieSelector();
 }
