@@ -4,16 +4,20 @@ var point = [false, 0,0,0];
 const pointNumbers = [4,5,6,8,9,10];
 const testRoll = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 
+const dieValue = [];
+const rollList = [];
+
 var button = document.getElementById("sim");
 var input = document.getElementById("rolls");
 var ul = document.getElementById("results");
 
-var dieOneButton = document.getElementById("dieOne");
-var dieTwoButton = document.getElementById("dieTwo");
-var dieThreeButton = document.getElementById("dieThree");
-var dieFourButton = document.getElementById("dieFour");
-var dieFiveButton = document.getElementById("dieFive");
-var dieSixButton = document.getElementById("dieSix");
+function setDice(one, two) {
+	if (one > two) {
+		return [two, one];
+	} else {
+		return [one, two];
+	}
+}
 
 function rollDice() {
 	let doWeShow = document.getElementById("showRolls").checked;
@@ -135,6 +139,23 @@ function imgSelector(die) {
 	}
 }
 
+function valueSelector(value) {
+	switch(value) {
+		case "dieOne":
+			return 1;
+		case "dieTwo":
+			return 2;
+		case "dieThree":
+			return 3;
+		case "dieFour":
+			return 4;
+		case "dieFive":
+			return 5;
+		case "dieSix":
+			return 6;
+	}
+}
+
 function  dieSelect(die) {
 	let firstDie = document.getElementById("selectOne");
 	let secondDie = document.getElementById("selectTwo");
@@ -145,6 +166,8 @@ function  dieSelect(die) {
 	let listFirst = document.createElement("img");
 	let listSecond = document.createElement("img");
 
+	let setDie = [];
+
 	if (firstDie.hasChildNodes() && secondDie.hasChildNodes()) {
 		clearDieSelector();
 	}
@@ -152,20 +175,23 @@ function  dieSelect(die) {
 	if (!(firstDie.hasChildNodes())) {
 		newDie.setAttribute("src", imgSelector(die));
 		firstDie.appendChild(newDie);
+		dieValue.push(valueSelector(die));
 	} else if (!(secondDie.hasChildNodes())) {
 		newDie.setAttribute("src", imgSelector(die));
 		secondDie.appendChild(newDie);
 		listFirst.setAttribute("src", firstDie.childNodes[0].src);
 		listFirst.setAttribute("width", "30");
 		listFirst.setAttribute("length", "30");
-		listFirst.setAttribute("alt", "Roll");
 		listSecond.setAttribute("src", secondDie.childNodes[0].src);
 		listSecond.setAttribute("width", "30");
 		listSecond.setAttribute("length", "30");
-		listSecond.setAttribute("alt", "Roll");
 		list.appendChild(listFirst);
 		list.appendChild(listSecond);
 		rollLog.appendChild(list);
+		dieValue.push(valueSelector(die));
+		rollList.push(setDice(dieValue[0], dieValue[1]));
+		console.log("roll", rollList);
+		dieValue.length = 0;
 	} 
 
 }
