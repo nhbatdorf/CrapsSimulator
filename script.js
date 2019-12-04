@@ -9,7 +9,7 @@ const rollList = [];
 
 var button = document.getElementById("sim");
 var input = document.getElementById("rolls");
-var ul = document.getElementById("results");
+var ul = document.getElementById("simRolls");
 
 function setDice(one, two) {
 	if (one > two) {
@@ -20,18 +20,13 @@ function setDice(one, two) {
 }
 
 function rollDice() {
-	let doWeShow = document.getElementById("showRolls").checked;
 	for (let x = 0; x<testRoll[0]; x++) {
 		let roll = 0;
 		dieOne = Math.floor(Math.random() * 6) + 1;
 		dieTwo = Math.floor(Math.random() * 6) + 1;
 		roll = dieOne + dieTwo;
 		testRoll[roll]++;
-		if (doWeShow) {
-			var weShow = document.createElement("li");
-			weShow.appendChild(document.createTextNode(roll));
-			ul.appendChild(weShow);
-		}
+		
 		console.log(roll);
 		if (point[0]) {
 			if (roll === point[1]){
@@ -58,29 +53,16 @@ function createListElement(num, amt, perc) {
 	ul.appendChild(li);
 }
 
-function createListElement() {
-	var btn = document.createElement("button");
-	btn.innerHTML = "Delete";
-	btn.onclick = removeParent;
-
-	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(input.value));
-	li.innerHTML = li.innerHTML + " ";
-	li.appendChild(btn);
-
-	ul.appendChild(li);
-	input.value = "";
-}
-
 function displayResults() {
 	var pointInfo = document.createElement("li");
 
 	for (let y = 2; y<13; y++) {
-		//createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
-		//console.log(y, Number(((testRoll[y]/testRoll[0]) * 100).toFixed(2)) + "%");
+		createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
+		console.log(y, Number(((testRoll[y]/testRoll[0]) * 100).toFixed(2)) + "%");
 	}
-	
 	pointInfo.appendChild(document.createTextNode("There were " + point[2] + " point(s) made and " + point[3] + " missed."));
+
+
 
 	ul.appendChild(pointInfo);
 }
@@ -91,22 +73,19 @@ function clearSim() {
 	}
 	for (let z = 0; z < testRoll.length; z++) {
 		testRoll[z] = 0;
-		//if (ul.hasChildNodes()) {
-		//	ul.removeChild(ul.childNodes[0]);
-		//}
+		if (ul.hasChildNodes()) {
+			ul.removeChild(ul.childNodes[0]);
+		}
 	}
 	point = [false, 0,0,0];
 }
 
 function runSim() {
-	clearSim();
 	if (input.value.length > 0) {
 		testRoll[0] = input.value;
-		//console.log(testRoll[0]);
 
 		rollDice();
 		displayResults();
-		
 	}
 }
 
@@ -199,5 +178,6 @@ function  dieSelect(die) {
 function rollRemove() {
 	let rollLog = document.getElementById("rollLog");
 	rollLog.removeChild(rollLog.lastChild);
+	rollList.pop();
 	clearDieSelector();
 }
