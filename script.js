@@ -22,9 +22,12 @@ function setDice(one, two) {
 function rollDice() {
 	for (let x = 0; x<testRoll[0]; x++) {
 		let roll = 0;
+		let pushToRollList = [];
 		dieOne = Math.floor(Math.random() * 6) + 1;
 		dieTwo = Math.floor(Math.random() * 6) + 1;
 		roll = dieOne + dieTwo;
+		pushToRollList = [dieOne, dieTwo];
+		rollList.push(setDice(dieOne, dieTwo));
 		testRoll[roll]++;
 		
 		console.log(roll);
@@ -48,7 +51,9 @@ function rollDice() {
 
 function createListElement(num, amt, perc) {
 	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(num + " rolled " + amt + " times for " + perc.toFixed(2) + "% of rolls."));
+	//li.appendChild(document.createTextNode(num + " rolled " + amt + " times for " + perc.toFixed(2) + "% of rolls."));
+	li.appendChild(document.createTextNode(num + " and " + amt + " = " + perc));
+
 
 	ul.appendChild(li);
 }
@@ -57,12 +62,16 @@ function displayResults() {
 	var pointInfo = document.createElement("li");
 
 	for (let y = 2; y<13; y++) {
-		createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
+		//createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
 		console.log(y, Number(((testRoll[y]/testRoll[0]) * 100).toFixed(2)) + "%");
 	}
-	pointInfo.appendChild(document.createTextNode("There were " + point[2] + " point(s) made and " + point[3] + " missed."));
+	//pointInfo.appendChild(document.createTextNode("There were " + point[2] + " point(s) made and " + point[3] + " missed."));
 
-
+	for (let x = 0; x<rollList.length; x++) {
+		createListElement(rollList[x][0], rollList[x][1], (rollList[x][0] + rollList[x][1]));
+		//pointInfo.appendChild(document.createTextNode(rollList[x]));
+		ul.appendChild(pointInfo);
+	}
 
 	ul.appendChild(pointInfo);
 }
