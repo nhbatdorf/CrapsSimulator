@@ -3,6 +3,70 @@ var dieTwo = 0;
 var point = [false, 0,0,0];
 const pointNumbers = [4,5,6,8,9,10];
 const testRoll = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+const rollProb = [{
+	value: [1,1],
+	probability: (1/36),
+	rolled: 0,},{
+	value: [1,2],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [1,3],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [1,4],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [1,5],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [1,6],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [2,2],
+	probability: (1/36),
+	rolled: 0,},{
+	value: [2,3],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [2,4],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [2,5],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [2,6],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [3,3],
+	probability: (1/36),
+	rolled: 0,},{
+	value: [3,4],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [3,5],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [3,6],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [4,4],
+	probability: (1/36),
+	rolled: 0,},{
+	value: [4,5],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [4,6],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [5,5],
+	probability: (1/36),
+	rolled: 0,},{
+	value: [5,6],
+	probability: (1/18),
+	rolled: 0,},{
+	value: [6,6],
+	probability: (1/36),
+	rolled: 0,}];
 
 const dieValue = [];
 const rollList = [];
@@ -68,11 +132,10 @@ function displayResults() {
 	//pointInfo.appendChild(document.createTextNode("There were " + point[2] + " point(s) made and " + point[3] + " missed."));
 
 	for (let x = 0; x<rollList.length; x++) {
-		createListElement(rollList[x][0], rollList[x][1], (rollList[x][0] + rollList[x][1]));
-		//pointInfo.appendChild(document.createTextNode(rollList[x]));
-		ul.appendChild(pointInfo);
+		//createListElement(rollList[x][0], rollList[x][1], (rollList[x][0] + rollList[x][1]));
 	}
 
+	pointInfo.appendChild(document.createTextNode("Simulated Rolls Added to List."));
 	ul.appendChild(pointInfo);
 }
 
@@ -89,15 +152,45 @@ function clearSim() {
 	point = [false, 0,0,0];
 }
 
+function clearRolled() {
+	for (let x = 0; x<rollProb.length; x++) {
+		rollProb[x].rolled = 0;
+	}
+}
+
+function compareProb() {
+	var betInfo = document.createElement("li");
+
+	for (let x = 0; x<rollList.length; x++) {
+		for (let y = 0; y<rollProb.length; y++) {
+			if ((rollList[x][0] === rollProb[y].value[0]) && (rollList[x][1] === rollProb[y].value[1])) {
+				rollProb[y].rolled++;
+			}
+		}
+	}
+
+	for (let z = 0; z<rollProb.length; z++) {
+		if (rollProb[z].probability > ((rollProb[z].rolled/rollList.length) + .02)) {
+			betInfo.appendChild(document.createTextNode("Bet " + rollProb[z].value[0] + rollProb[z].value[1]));
+			ul.appendChild(betInfo);
+		}
+	}
+
+	console.log(rollProb);
+}
+
 function runSim() {
 	if (input.value.length > 0) {
 		testRoll[0] = input.value;
 
 		rollDice();
 		displayResults();
+		clearRolled();
+		compareProb();
 	}
 }
 
+console.log(rollProb);
 button.addEventListener("click", runSim);
 
 //////////////////////////////////////////////////////////////////////////////////////////
