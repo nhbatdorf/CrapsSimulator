@@ -2,7 +2,6 @@ var dieOne = 0;
 var dieTwo = 0;
 var point = [false, 0,0,0];
 const pointNumbers = [4,5,6,8,9,10];
-const testRoll = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 const rollProb = [{
 	value: [1,1],
 	probability: (1/36),
@@ -70,6 +69,7 @@ const rollProb = [{
 
 const dieValue = [];
 const rollList = [];
+const bets = [[]];
 
 var button = document.getElementById("sim");
 var input = document.getElementById("rolls");
@@ -83,8 +83,10 @@ function setDice(one, two) {
 	}
 }
 
-function rollDice() {
-	for (let x = 0; x<testRoll[0]; x++) {
+function rollDice(times) {
+	let wonBet = document.createElement("li");
+
+	for (let x = 0; x<times; x++) {
 		let roll = 0;
 		let pushToRollList = [];
 		dieOne = Math.floor(Math.random() * 6) + 1;
@@ -92,7 +94,6 @@ function rollDice() {
 		roll = dieOne + dieTwo;
 		pushToRollList = [dieOne, dieTwo];
 		rollList.push(setDice(dieOne, dieTwo));
-		testRoll[roll]++;
 		
 		console.log(roll);
 		if (point[0]) {
@@ -110,6 +111,13 @@ function rollDice() {
 			point[1] = roll;
 			console.log("The point is " + point[1] + ".");
 		}
+
+		for (let y = 0; y<bets.length; y++) {
+			if ((bets[y][0] === rollList[rollList.length-1][0]) && (bets[y][1] === rollList[rollList.length-1][1])) {
+					wonBet.appendChild(document.createTextNode("You won bet! " + bets[y][0] + bets[y][1]));
+					ul.appendChild(wonBet);
+			}
+		}
 	}
 }
 
@@ -125,10 +133,6 @@ function createListElement(num, amt, perc) {
 function displayResults() {
 	var pointInfo = document.createElement("li");
 
-	for (let y = 2; y<13; y++) {
-		//createListElement(y, testRoll[y], ((testRoll[y]/testRoll[0]) * 100));
-		console.log(y, Number(((testRoll[y]/testRoll[0]) * 100).toFixed(2)) + "%");
-	}
 	//pointInfo.appendChild(document.createTextNode("There were " + point[2] + " point(s) made and " + point[3] + " missed."));
 
 	for (let x = 0; x<rollList.length; x++) {
@@ -143,12 +147,6 @@ function clearSim() {
 	while (ul.hasChildNodes()) {
 		ul.removeChild(ul.childNodes[0]);
 	}
-	for (let z = 0; z < testRoll.length; z++) {
-		testRoll[z] = 0;
-		if (ul.hasChildNodes()) {
-			ul.removeChild(ul.childNodes[0]);
-		}
-	}
 	point = [false, 0,0,0];
 }
 
@@ -161,6 +159,7 @@ function clearRolled() {
 function compareProb() {
 	var betInfo = document.createElement("li");
 
+	bets.length = 0;
 	for (let x = 0; x<rollList.length; x++) {
 		for (let y = 0; y<rollProb.length; y++) {
 			if ((rollList[x][0] === rollProb[y].value[0]) && (rollList[x][1] === rollProb[y].value[1])) {
@@ -173,6 +172,7 @@ function compareProb() {
 		if (rollProb[z].probability > ((rollProb[z].rolled/rollList.length) + .02)) {
 			betInfo.appendChild(document.createTextNode("Bet " + rollProb[z].value[0] + rollProb[z].value[1]));
 			ul.appendChild(betInfo);
+			bets.push(setDice(rollProb[z].value[0], rollProb[z].value[1]));
 		}
 	}
 
@@ -180,10 +180,12 @@ function compareProb() {
 }
 
 function runSim() {
+	if (ul.hasChildNodes()){
+		clearSim();
+	}
 	if (input.value.length > 0) {
-		testRoll[0] = input.value;
 
-		rollDice();
+		rollDice(input.value);
 		displayResults();
 		clearRolled();
 		compareProb();
