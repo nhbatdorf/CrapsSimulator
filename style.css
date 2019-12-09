@@ -1,8 +1,18 @@
 body {
 	margin: auto;
 	font-family: Times New Roman;
-	font-size: 10px;
+    color: white;
 	background-color: #477148;
+
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+div {
+    border-style: solid;
+    border-color: black;
 }
 
 ul.results {
@@ -10,16 +20,17 @@ ul.results {
 }
 
 .rollInputFrame {
+    grid-column: 1/4;
     display: grid;
-    grid-gap: 3vw;
-    grid-template-columns: auto auto auto;
-    position: fixed;
-    bottom: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    border-style: solid;
+    border-color: red;
 }
 
-.dice {
+.dice, .remove {
     text-align: center;
-    width: 30vw;
 }
 
 .button:hover {
