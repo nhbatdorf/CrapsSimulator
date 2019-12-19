@@ -13,6 +13,7 @@ body {
 div {
     border-style: solid;
     border-color: black;
+    overflow: auto;
 }
 
 ul.results {
@@ -24,9 +25,6 @@ ul.results {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-
-    border-style: solid;
-    border-color: red;
 }
 
 .dice, .remove {

@@ -3,69 +3,27 @@ var dieTwo = 0;
 var point = [false, 0,0,0];
 const pointNumbers = [4,5,6,8,9,10];
 const rollProb = [{
-	value: [1,1],
-	probability: (1/36),
-	rolled: 0,},{
-	value: [1,2],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [1,3],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [1,4],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [1,5],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [1,6],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [2,2],
-	probability: (1/36),
-	rolled: 0,},{
-	value: [2,3],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [2,4],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [2,5],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [2,6],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [3,3],
-	probability: (1/36),
-	rolled: 0,},{
-	value: [3,4],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [3,5],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [3,6],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [4,4],
-	probability: (1/36),
-	rolled: 0,},{
-	value: [4,5],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [4,6],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [5,5],
-	probability: (1/36),
-	rolled: 0,},{
-	value: [5,6],
-	probability: (1/18),
-	rolled: 0,},{
-	value: [6,6],
-	probability: (1/36),
-	rolled: 0,}];
+	value: [1,1], probability: (1/36), rolled: 0,},{
+	value: [1,2], probability: (1/18), rolled: 0,},{
+	value: [1,3], probability: (1/18), rolled: 0,},{
+	value: [1,4], probability: (1/18), rolled: 0,},{
+	value: [1,5], probability: (1/18), rolled: 0,},{
+	value: [1,6], probability: (1/18), rolled: 0,},{
+	value: [2,2], probability: (1/36), rolled: 0,},{
+	value: [2,3], probability: (1/18), rolled: 0,},{
+	value: [2,4], probability: (1/18), rolled: 0,},{
+	value: [2,5], probability: (1/18), rolled: 0,},{
+	value: [2,6], probability: (1/18), rolled: 0,},{
+	value: [3,3], probability: (1/36), rolled: 0,},{
+	value: [3,4], probability: (1/18), rolled: 0,},{
+	value: [3,5], probability: (1/18), rolled: 0,},{
+	value: [3,6], probability: (1/18), rolled: 0,},{
+	value: [4,4], probability: (1/36), rolled: 0,},{
+	value: [4,5], probability: (1/18), rolled: 0,},{
+	value: [4,6], probability: (1/18), rolled: 0,},{
+	value: [5,5], probability: (1/36), rolled: 0,},{
+	value: [5,6], probability: (1/18), rolled: 0,},{
+	value: [6,6], probability: (1/36), rolled: 0,}];
 
 const dieValue = [];
 const rollList = [];
@@ -94,7 +52,8 @@ function rollDice(times) {
 		roll = dieOne + dieTwo;
 		pushToRollList = [dieOne, dieTwo];
 		rollList.push(setDice(dieOne, dieTwo));
-		
+		postDieRoll(imgSelector(dieOne), imgSelector(dieTwo));
+
 		console.log(roll);
 		if (point[0]) {
 			if (roll === point[1]){
@@ -175,8 +134,6 @@ function compareProb() {
 			bets.push(setDice(rollProb[z].value[0], rollProb[z].value[1]));
 		}
 	}
-
-	console.log(rollProb);
 }
 
 function runSim() {
@@ -192,51 +149,49 @@ function runSim() {
 	}
 }
 
-console.log(rollProb);
 button.addEventListener("click", runSim);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function clearDieSelector() {
-	let firstDie = document.getElementById("selectOne");
-	let secondDie = document.getElementById("selectTwo");
-
-	firstDie.removeChild(firstDie.childNodes[0]);
-	secondDie.removeChild(secondDie.childNodes[0]);
+function clearDieSelector(first, second) {
+	if (first.hasChildNodes() && second.hasChildNodes()) {
+		first.removeChild(first.childNodes[0]);
+		second.removeChild(second.childNodes[0]);
+	}
 }
 
 function imgSelector(die) {
 	switch(die) {
-		case "dieOne":
+		case 1:
 			return "One.gif";
-		case "dieTwo":
+		case 2:
 			return "Two.gif";
-		case "dieThree":
+		case 3:
 			return "Three.gif";
-		case "dieFour":
+		case 4:
 			return "Four.gif";
-		case "dieFive":
+		case 5:
 			return "Five.gif";
-		case "dieSix":
+		case 6:
 			return "Six.gif";
 	}
 }
 
-function valueSelector(value) {
-	switch(value) {
-		case "dieOne":
-			return 1;
-		case "dieTwo":
-			return 2;
-		case "dieThree":
-			return 3;
-		case "dieFour":
-			return 4;
-		case "dieFive":
-			return 5;
-		case "dieSix":
-			return 6;
-	}
+function postDieRoll(first, second) {
+	let rollLog = document.getElementById("rollLog");
+	let list = document.createElement("li");
+	let listFirst = document.createElement("img");
+	let listSecond = document.createElement("img");
+
+	listFirst.setAttribute("src", first);
+	listFirst.setAttribute("width", "30");
+	listFirst.setAttribute("length", "30");
+	listSecond.setAttribute("src", second);
+	listSecond.setAttribute("width", "30");
+	listSecond.setAttribute("length", "30");
+	list.appendChild(listFirst);
+	list.appendChild(listSecond);
+	rollLog.appendChild(list);
 }
 
 function  dieSelect(die) {
@@ -244,34 +199,17 @@ function  dieSelect(die) {
 	let secondDie = document.getElementById("selectTwo");
 	let newDie = document.createElement("img");
 
-	let rollLog = document.getElementById("rollLog");
-	let list = document.createElement("li");
-	let listFirst = document.createElement("img");
-	let listSecond = document.createElement("img");
-
-	let setDie = [];
-
-	if (firstDie.hasChildNodes() && secondDie.hasChildNodes()) {
-		clearDieSelector();
-	}
+	clearDieSelector(firstDie, secondDie);
 
 	if (!(firstDie.hasChildNodes())) {
 		newDie.setAttribute("src", imgSelector(die));
 		firstDie.appendChild(newDie);
-		dieValue.push(valueSelector(die));
+		dieValue.push(die);
 	} else if (!(secondDie.hasChildNodes())) {
 		newDie.setAttribute("src", imgSelector(die));
 		secondDie.appendChild(newDie);
-		listFirst.setAttribute("src", firstDie.childNodes[0].src);
-		listFirst.setAttribute("width", "30");
-		listFirst.setAttribute("length", "30");
-		listSecond.setAttribute("src", secondDie.childNodes[0].src);
-		listSecond.setAttribute("width", "30");
-		listSecond.setAttribute("length", "30");
-		list.appendChild(listFirst);
-		list.appendChild(listSecond);
-		rollLog.appendChild(list);
-		dieValue.push(valueSelector(die));
+		postDieRoll(firstDie.childNodes[0].src, secondDie.childNodes[0].src);
+		dieValue.push(die);
 		rollList.push(setDice(dieValue[0], dieValue[1]));
 		console.log("roll", rollList);
 		dieValue.length = 0;
@@ -281,7 +219,15 @@ function  dieSelect(die) {
 
 function rollRemove() {
 	let rollLog = document.getElementById("rollLog");
-	rollLog.removeChild(rollLog.lastChild);
-	rollList.pop();
-	clearDieSelector();
+	let firstDie = document.getElementById("selectOne");
+	let secondDie = document.getElementById("selectTwo");
+
+	if (firstDie.hasChildNodes() && !secondDie.hasChildNodes()) {
+		firstDie.removeChild(firstDie.childNodes[0]);
+		dieValue.pop();
+	} else {
+		rollLog.removeChild(rollLog.lastChild);
+		rollList.pop();
+		clearDieSelector(firstDie, secondDie);
+	}
 }

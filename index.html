@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div>
-		<input id="rolls" type="text" placeholder="enter # of rolls">
+		<input id="rolls" type="text" size="7" placeholder="enter # of rolls">
 		<button id="sim">Simulate</button>
 	</div>
 	
@@ -25,27 +25,13 @@
 	<div class="rollInputFrame">
 		<div class="dice" id="selectOne"></div>
 		<div class="dice" id="selectTwo"></div>
-		<div class="remove">
-			<button class="button" onclick="rollRemove()"><img src="Undo.gif"></button>
-		</div>
-		<div class="dice">
-    		<button class="button" id="dieOne" onclick="dieSelect(this.id)"><img src="One.gif"></button>
-    	</div>
-    	<div class="dice">
-    		<button class="button" id="dieTwo" onclick="dieSelect(this.id)"><img src="Two.gif"></button>
-    	</div>
-    	<div class="dice">
-    		<button class="button" id="dieThree" onclick="dieSelect(this.id)"><img src="Three.gif"></button>
-    	</div>
-    	<div class="dice">
-    		<button class="button" id="dieFour" onclick="dieSelect(this.id)"><img src="Four.gif"></button>
-    	</div>
-    	<div class="dice">
-    		<button class="button" id="dieFive" onclick="dieSelect(this.id)"><img src="Five.gif"></button>
-    	</div>
-    	<div class="dice">
-    		<button class="button" id="dieSix" onclick="dieSelect(this.id)"><img src="Six.gif"></button>
-    	</div>
+		<button class="remove button" onclick="rollRemove()"><img src="Undo.gif"></button>
+		<button class="dice button" id="dieOne" onclick="dieSelect(1)"><img src="One.gif"></button>
+    	<button class="dice button" id="dieTwo" onclick="dieSelect(2)"><img src="Two.gif"></button>
+    	<button class="dice button" id="dieThree" onclick="dieSelect(3)"><img src="Three.gif"></button>
+    	<button class="dice button" id="dieFour" onclick="dieSelect(4)"><img src="Four.gif"></button>
+    	<button class="dice button" id="dieFive" onclick="dieSelect(5)"><img src="Five.gif"></button>
+		<button class="dice button" id="dieSix" onclick="dieSelect(6)"><img src="Six.gif"></button>
    	</div>			
 
 	<script type="text/javascript" src="script.js"></script>
