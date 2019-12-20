@@ -7,7 +7,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 40vh 60vh;
 }
 
 div {
@@ -15,15 +15,28 @@ div {
     border-color: black;
 }
 
+.uiInputDiv {
+    height: 40vh;
+    text-align: center;
+}
+
+.uiInput {
+    display: inline-block;
+    justify-content: center;
+    width: 75%;
+    margin: 5%;
+}
+
 .suggest {
-    
+    grid-column: 2/4;
 }
 
 ul.results {
-    height: 50vh;
+    height: 40vh;
     list-style-type: none;
     display: flex;
     flex-flow: column wrap;
+    overflow: auto;
 }
 
 .rollInputFrame {

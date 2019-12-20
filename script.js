@@ -41,7 +41,31 @@ function setDice(one, two) {
 	}
 }
 
+function clearRollLog() {
+	let rollLog = document.getElementById("rollLog");
+
+	for (x=0; x<rollList.length; x++) {
+		if (rollLog.hasChildNodes()) {
+			rollLog.removeChild(rollLog.lastChild);
+		}
+	}
+}
+
+function postRollList() {
+	let z=0
+
+	if (rollList.length>36) {
+		z = rollList.length - 36;
+	} else {
+		z = 0;
+	}
+	for (; z < rollList.length; z++) {
+		postDieRoll(imgSelector(rollList[z][0]), imgSelector(rollList[z][1]));
+	}
+}
+
 function rollDice(times) {
+	let rollLog = document.getElementById("rollLog");
 	let wonBet = document.createElement("li");
 
 	for (let x = 0; x<times; x++) {
@@ -52,7 +76,7 @@ function rollDice(times) {
 		roll = dieOne + dieTwo;
 		pushToRollList = [dieOne, dieTwo];
 		rollList.push(setDice(dieOne, dieTwo));
-		postDieRoll(imgSelector(dieOne), imgSelector(dieTwo));
+		//postDieRoll(imgSelector(dieOne), imgSelector(dieTwo));
 
 		console.log(roll);
 		if (point[0]) {
@@ -78,6 +102,9 @@ function rollDice(times) {
 			}
 		}
 	}
+
+	clearRollLog();
+	postRollList();
 }
 
 function createListElement(num, amt, perc) {
@@ -184,11 +211,9 @@ function postDieRoll(first, second) {
 	let listSecond = document.createElement("img");
 
 	listFirst.setAttribute("src", first);
-	listFirst.setAttribute("width", "30");
-	listFirst.setAttribute("length", "30");
+	listFirst.setAttribute("height", "35vh");
 	listSecond.setAttribute("src", second);
-	listSecond.setAttribute("width", "30");
-	listSecond.setAttribute("length", "30");
+	listSecond.setAttribute("height", "35vh");
 	list.appendChild(listFirst);
 	list.appendChild(listSecond);
 	rollLog.appendChild(list);
@@ -208,9 +233,10 @@ function  dieSelect(die) {
 	} else if (!(secondDie.hasChildNodes())) {
 		newDie.setAttribute("src", imgSelector(die));
 		secondDie.appendChild(newDie);
-		postDieRoll(firstDie.childNodes[0].src, secondDie.childNodes[0].src);
 		dieValue.push(die);
 		rollList.push(setDice(dieValue[0], dieValue[1]));
+		clearRollLog();
+		postRollList();
 		console.log("roll", rollList);
 		dieValue.length = 0;
 	} 
