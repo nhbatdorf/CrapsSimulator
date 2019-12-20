@@ -13,11 +13,17 @@ body {
 div {
     border-style: solid;
     border-color: black;
-    overflow: auto;
+}
+
+.suggest {
+    
 }
 
 ul.results {
+    height: 50vh;
     list-style-type: none;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 .rollInputFrame {
@@ -29,6 +35,7 @@ ul.results {
 
 .dice, .remove {
     text-align: center;
+    height: 100%;
 }
 
 .button:hover {
