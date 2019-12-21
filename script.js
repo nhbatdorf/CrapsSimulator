@@ -28,8 +28,10 @@ const rollProb = [{
 const dieValue = [];
 const rollList = [];
 const bets = [[]];
+const bank = 100;
 
-var button = document.getElementById("sim");
+var simulate = document.getElementById("sim");
+var makeBet = document.getElementById("bet");
 var input = document.getElementById("rolls");
 var ul = document.getElementById("simRolls");
 
@@ -60,7 +62,7 @@ function postRollList() {
 		z = 0;
 	}
 	for (; z < rollList.length; z++) {
-		postDieRoll(imgSelector(rollList[z][0]), imgSelector(rollList[z][1]));
+		postDieRoll(imgSelector(rollList[z][0]), imgSelector(rollList[z][1]), "rollLog");
 	}
 }
 
@@ -76,7 +78,6 @@ function rollDice(times) {
 		roll = dieOne + dieTwo;
 		pushToRollList = [dieOne, dieTwo];
 		rollList.push(setDice(dieOne, dieTwo));
-		//postDieRoll(imgSelector(dieOne), imgSelector(dieTwo));
 
 		console.log(roll);
 		if (point[0]) {
@@ -143,6 +144,8 @@ function clearRolled() {
 }
 
 function compareProb() {
+	let z = 0;
+
 	var betInfo = document.createElement("li");
 
 	bets.length = 0;
@@ -154,13 +157,23 @@ function compareProb() {
 		}
 	}
 
-	for (let z = 0; z<rollProb.length; z++) {
+	if (rollList.length >= 36) {
+		z = 0;
+	} else {
+		z = rollProb.length;
+	}
+	for (; z<rollProb.length; z++) {
 		if (rollProb[z].probability > ((rollProb[z].rolled/rollList.length) + .02)) {
-			betInfo.appendChild(document.createTextNode("Bet " + rollProb[z].value[0] + rollProb[z].value[1]));
-			ul.appendChild(betInfo);
+			//betInfo.appendChild(document.createTextNode("Bet " + rollProb[z].value[0] + rollProb[z].value[1]));
+			//ul.appendChild(betInfo);
 			bets.push(setDice(rollProb[z].value[0], rollProb[z].value[1]));
+			postDieRoll(imgSelector(rollProb[z].value[0]), imgSelector(rollProb[z].value[1]), "simRolls");
 		}
 	}
+}
+
+function lockBets() {
+
 }
 
 function runSim() {
@@ -176,7 +189,8 @@ function runSim() {
 	}
 }
 
-button.addEventListener("click", runSim);
+simulate.addEventListener("click", runSim);
+makeBet.addEventListener("click", lockBets);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -204,8 +218,8 @@ function imgSelector(die) {
 	}
 }
 
-function postDieRoll(first, second) {
-	let rollLog = document.getElementById("rollLog");
+function postDieRoll(first, second, log) {
+	let display = document.getElementById(log);
 	let list = document.createElement("li");
 	let listFirst = document.createElement("img");
 	let listSecond = document.createElement("img");
@@ -216,7 +230,7 @@ function postDieRoll(first, second) {
 	listSecond.setAttribute("height", "35vh");
 	list.appendChild(listFirst);
 	list.appendChild(listSecond);
-	rollLog.appendChild(list);
+	display.appendChild(list);
 }
 
 function  dieSelect(die) {
