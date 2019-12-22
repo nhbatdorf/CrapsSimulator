@@ -28,7 +28,9 @@ const rollProb = [{
 const dieValue = [];
 const rollList = [];
 const bets = [[]];
-const bank = 100;
+
+var bank = 100;
+var tally = false;
 
 var simulate = document.getElementById("sim");
 var makeBet = document.getElementById("bet");
@@ -96,13 +98,27 @@ function rollDice(times) {
 			console.log("The point is " + point[1] + ".");
 		}
 
-		for (let y = 0; y<bets.length; y++) {
-			if ((bets[y][0] === rollList[rollList.length-1][0]) && (bets[y][1] === rollList[rollList.length-1][1])) {
-					wonBet.appendChild(document.createTextNode("You won bet! " + bets[y][0] + bets[y][1]));
-					ul.appendChild(wonBet);
+		if (tally) {
+			bank = bank - bets.length;
+			for (let y = 0; y<bets.length; y++) {
+				if ((bets[y][0] === rollList[rollList.length-1][0]) && (bets[y][1] === rollList[rollList.length-1][1])) {
+					for (let z = 0; z<rollProb.length; z++) {
+						if ((rollProb[z].value[0] === bets[y][0]) && (rollProb[z].value[1] === bets[y][1])) {
+							if (rollProb[z].probability === 1/36) {
+								bank = bank + 30;
+								wonBet.appendChild(document.createTextNode("You won $30 on " + bets[y][0] + bets[y][1] + "!"));
+							} else {
+								bank = bank + 15;
+								wonBet.appendChild(document.createTextNode("You won $15 on " + bets[y][0] + bets[y][1] + "!"));
+							}
+							ul.appendChild(wonBet);
+						}
+					}
+				}
 			}
 		}
 	}
+	console.log(bank);
 
 	clearRollLog();
 	postRollList();
@@ -157,7 +173,7 @@ function compareProb() {
 		}
 	}
 
-	if (rollList.length >= 36) {
+	if (rollList.length >= 30) {
 		z = 0;
 	} else {
 		z = rollProb.length;
@@ -173,7 +189,7 @@ function compareProb() {
 }
 
 function lockBets() {
-
+	tally = true;
 }
 
 function runSim() {
