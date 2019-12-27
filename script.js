@@ -220,17 +220,17 @@ function clearDieSelector(first, second) {
 function imgSelector(die) {
 	switch(die) {
 		case 1:
-			return "One.gif";
+			return "One.png";
 		case 2:
-			return "Two.gif";
+			return "Two.png";
 		case 3:
-			return "Three.gif";
+			return "Three.png";
 		case 4:
-			return "Four.gif";
+			return "Four.png";
 		case 5:
-			return "Five.gif";
+			return "Five.png";
 		case 6:
-			return "Six.gif";
+			return "Six.png";
 	}
 }
 
