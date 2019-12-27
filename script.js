@@ -32,8 +32,12 @@ const bets = [[]];
 var bank = 100;
 var tally = false;
 
-var simulate = document.getElementById("sim");
-var makeBet = document.getElementById("bet");
+var simBut = document.getElementById("sim");
+var betBut = document.getElementById("bet");
+var logBut = document.getElementById("log");
+
+var simulate = document.getElementById("simulate");
+var makeBet = document.getElementById("betEnter");
 var input = document.getElementById("rolls");
 var ul = document.getElementById("simRolls");
 
@@ -183,7 +187,7 @@ function compareProb() {
 			//betInfo.appendChild(document.createTextNode("Bet " + rollProb[z].value[0] + rollProb[z].value[1]));
 			//ul.appendChild(betInfo);
 			bets.push(setDice(rollProb[z].value[0], rollProb[z].value[1]));
-			postDieRoll(imgSelector(rollProb[z].value[0]), imgSelector(rollProb[z].value[1]), "simRolls");
+			postDieRoll(imgSelector(rollProb[z].value[0]), imgSelector(rollProb[z].value[1]), "betLog");
 		}
 	}
 }
@@ -203,6 +207,29 @@ function runSim() {
 		clearRolled();
 		compareProb();
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+function activateDiv(div) {
+	let sim = document.getElementById("simDiv");
+	let bet = document.getElementById("betDiv");
+	let log = document.getElementById("logDiv");
+
+	if (div === 0) {
+		sim.hidden = false;
+		bet.hidden = true;
+		log.hidden = true;
+	} else if (div === 1) {
+		sim.hidden = true;
+		bet.hidden = false;
+		log.hidden = true;
+	} else if (div === 2) {
+		sim.hidden = true;
+		bet.hidden = true;
+		log.hidden = false;
+	}
+
 }
 
 simulate.addEventListener("click", runSim);

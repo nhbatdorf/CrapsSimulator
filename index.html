@@ -5,25 +5,37 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div class="uiInputDiv">
+	<div class="navbar">
+		<button class="nav" id="sim" onclick="activateDiv(0)">SIM</a>
+		<button class="nav" id="bet" onclick="activateDiv(1)">BET</a>
+		<button class="nav" id="log" onclick="activateDiv(2)">LOG</a>
+	</div>
+
+	<div class="uiInputDiv" id="simDiv">
 		<input class="uiInput" id="rolls" type="text" size="7" placeholder="enter # of rolls">
-		<button class="uiInput" id="sim">Simulate</button>
-		<button class="uiInput" id="bet">Bet</button>
+		<button class="uiInput" id="simulate">Simulate</button>
+		<button class="uiInput" id="betEnter">Bet</button>
 		<ul class="results" id="simRolls">
 			<li></li>
 		</ul>
 	</div>
 
-	<div class="suggest">
+	<div class="bets" id="betDiv" hidden>
+		<ul class="suggest" id="betLog">
+			<li></li>
+		</ul>
+	</div>
+
+	<div class="rlog" id="logDiv" hidden>
 		<ul  class="results" id="rollLog">
 			<li></li>
 		</ul>
 	</div>
 
 	<div class="rollInputFrame">
-		<div class="dice" id="selectOne"></div>
-		<div class="dice" id="selectTwo"></div>
-		<button class="remove button" onclick="rollRemove()"><img src="Undo.png"></button>
+		<div class="dice top" id="selectOne"></div>
+		<div class="dice top" id="selectTwo"></div>
+		<button class="dice top remove button" onclick="rollRemove()"><img src="Undo.png"></button>
 		<button class="dice button" id="dieOne" onclick="dieSelect(1)"><img src="One.png"></button>
     	<button class="dice button" id="dieTwo" onclick="dieSelect(2)"><img src="Two.png"></button>
     	<button class="dice button" id="dieThree" onclick="dieSelect(3)"><img src="Three.png"></button>
